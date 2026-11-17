@@ -1,14 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import { SEATS, BOARD, byKey, systemFor, parseCard, checkQuotes, defaultBoard, loadRoster } from "./seats.mjs";
-import * as ai from "./anthropic.mjs";
-import { S } from "./anthropic.mjs";
+import * as ai from "./ai.mjs";
+import { S, getDefaultModels } from "./ai.mjs";
 import { SESSIONS_DIR } from "./env.mjs";
 
-export const MODELS = {
-  seat: process.env.SEAT_MODEL || "claude-sonnet-5-5",
-  chair: process.env.CHAIR_MODEL || "claude-opus-5-5",
-};
+export const MODELS = new Proxy({}, {
+  get(target, prop) {
+    const def = getDefaultModels();
+    return def[prop] || target[prop];
+  }
+});
 
 // The board comes from the roster: the saved default board, or every seat it lists.
 const chairSystem = (st) => {

@@ -26,8 +26,9 @@ Those seven are the **default board**. Five more advisors are on call, and the C
 
 ## What you need
 
-- [Claude Code](https://claude.com/claude-code). Your Claude plan covers it; no API key needed.
-- [Node.js](https://nodejs.org) 20 or newer, for the room. There's nothing to install beyond that.
+- **Antigravity** or [Claude Code](https://claude.com/claude-code).
+- [Node.js](https://nodejs.org) 20 or newer, for the room. There are no npm dependencies to install.
+- *(Optional)* A Google Gemini API key or Anthropic API key if you want to run councils directly from the web browser or CLI.
 
 ## Setup
 
@@ -36,17 +37,28 @@ git clone https://github.com/nateherkai/roast-room.git
 cd roast-room
 ```
 
-Or open Claude Code anywhere and say: "Clone github.com/nateherkai/roast-room and start the room for me."
+Or open Antigravity anywhere and say: "Clone github.com/nateherkai/roast-room and start the room for me."
 
 ## Run a roast
 
+### In Antigravity
+1. Start the room: `npm start`, then open http://localhost:4730.
+2. In Antigravity chat, say: `Roast this decision: [your question]`
+3. The Chair convenes the council and streams the live debate and verdict to http://localhost:4730.
+
+### In Claude Code
 1. Start the room: `npm start`, then open http://localhost:4730. Leave it open.
 2. Open Claude Code in the same folder: `claude`
 3. Type `/roast-room` and your decision.
 4. Answer the Chair's questions, then watch the council argue it out in the room.
+
+### Directly from the Browser or CLI
+- **In browser:** Open http://localhost:4730 and click **"Enter question here"** to type your decision into the composer.
+- **In terminal:** `npm run roast "Should I raise a seed round or stay bootstrapped?" --quick`
+
 5. When the verdict lands, click **Download PDF**.
 
-You also get a short verdict in Claude Code, and the full report lands in `sessions/<date>-<decision>/verdict.md`.
+You also get a short verdict in chat, and the full report lands in `sessions/<date>-<decision>/verdict.md`.
 
 ## What to put in your question
 

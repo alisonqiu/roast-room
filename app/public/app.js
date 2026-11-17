@@ -19,10 +19,10 @@ const GUIDE = `
     <div class="guide-sec">
       <h4>How to use the Roast Room</h4>
       <ol>
-        <li><span>Open Claude Code in this folder.</span></li>
-        <li><span>Type <code>/roast-room</code> and your decision.</span></li>
-        <li><span>Pick your advisors (the Chair recommends a board) and answer its questions. Then watch the council argue it out here.</span></li>
-        <li><span>When the verdict lands, download it as a PDF.</span></li>
+        <li><span>In Antigravity chat, tell the agent your decision (e.g. <code>Roast this decision: [your question]</code>), or enter it directly in this room.</span></li>
+        <li><span>The Chair seats the council (Bezos, Graham, Hormozi, Gary Vee, Martell, Wickman, Buffett) and frames the brief.</span></li>
+        <li><span>Watch the advisors debate in 3 rounds: Openings, Debate, and Vote.</span></li>
+        <li><span>When the verdict lands, download it as a branded PDF.</span></li>
       </ol>
     </div>
     <div class="guide-sec">
@@ -40,7 +40,7 @@ const GUIDE = `
     <div class="guide-sec">
       <h4>Example</h4>
       <div class="example">
-        <p><code>/roast-room</code> ${EXAMPLE.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</p>
+        <p><code>Roast this decision:</code> ${EXAMPLE.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</p>
         <button class="ghost" type="button" data-copy-example>Copy this example</button>
       </div>
     </div>
@@ -49,9 +49,9 @@ const GUIDE = `
       <ul>
         <li><span><b>Pick your council:</b> the Chair recommends the advisors that fit your question and asks you to confirm. Add or drop anyone.</span></li>
         <li><span><b>Full council:</b> 5 to 7 advisors, 3 rounds. For big calls that are hard to undo.</span></li>
-        <li><span><b>Quick:</b> add <code>--quick</code> for 4 advisors and 2 rounds. Uses far less of your plan.</span></li>
+        <li><span><b>Quick:</b> add <code>--quick</code> for 4 advisors and 2 rounds.</span></li>
         <li><span><b>Every council is saved.</b> Open Past sessions to replay one or download its PDF.</span></li>
-        <li><span><b>Add an advisor:</b> type <code>/newroaster</code> and a name. Change your default board with <code>/roast-room board</code>.</span></li>
+        <li><span><b>Add an advisor:</b> ask Antigravity to add an advisor or run <code>/newroaster</code>.</span></li>
       </ul>
     </div>
   </div>`;
@@ -253,12 +253,17 @@ function bindUI() {
   $("#plates").addEventListener("click", openFrom);
   $("#seats").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openFrom(e); } });
   $("#feed").addEventListener("click", (e) => { const c = e.target.closest(".feed-card"); if (c) openCard(c.dataset.seat, Number(c.dataset.round)); });
+  $("#waitOpenComposer")?.addEventListener("click", () => {
+    $("#waiting").hidden = true;
+    $("#composer").hidden = false;
+    $("#prompt").focus();
+  });
   $("#waitHistory").addEventListener("click", openHistory);
   $("#waitGuide").addEventListener("click", openGuide);
   $("#guideBtn").addEventListener("click", openGuide);
   document.addEventListener("click", async (e) => {
     if (e.target.closest("[data-copy-example]")) {
-      try { await navigator.clipboard.writeText("/roast-room " + EXAMPLE); toast("Copied. Paste it into Claude Code."); }
+      try { await navigator.clipboard.writeText("Roast this decision: " + EXAMPLE); toast("Copied. Paste it into Antigravity."); }
       catch { toast("Copy didn't work here. Select the text and copy it."); }
     }
     if (e.target.closest("[data-pdf]")) savePdf(e.target.closest("[data-pdf]"));

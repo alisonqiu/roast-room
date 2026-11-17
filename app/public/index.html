@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Roast Room · AI Automation Society</title>
+  <title>Roast Room · Antigravity</title>
   <link rel="icon" href="/brand/favicon-ais.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,9 +55,13 @@
           <div class="waiting" id="waiting" hidden>
             <span class="pulse"><i></i>The room is open</span>
             <h2 data-type>Bring a decision to the Roast Room</h2>
-            <p>In Claude Code, type the line below with your decision. The council shows up here and argues it out live.</p>
-            <code>/roast-room should I ...</code>
-            <div class="row"><button class="ghost" type="button" id="waitGuide">What to put in your question</button><button class="ghost" type="button" id="waitHistory">Watch a past council</button></div>
+            <p>In Antigravity, ask the agent your decision (e.g. <code>Roast this decision...</code>), or enter it directly below.</p>
+            <code>Roast this decision: should I ...</code>
+            <div class="row">
+              <button class="ghost" type="button" id="waitOpenComposer">Enter question here</button>
+              <button class="ghost" type="button" id="waitGuide">What to put in your question</button>
+              <button class="ghost" type="button" id="waitHistory">Watch a past council</button>
+            </div>
           </div>
 
           <form class="composer" id="composer" hidden>
@@ -89,7 +93,7 @@
             <p class="wc-sub" id="wcSub"></p>
             <p class="wc-muse" id="wcMuse"></p>
             <div class="wc-bar"><i id="wcBar"></i></div>
-            <p class="wc-nudge" id="wcNudge" hidden>Nothing new for a while? Check Claude Code. It may be waiting for you to answer or approve something.</p>
+            <p class="wc-nudge" id="wcNudge" hidden>Nothing new for a while? Check Antigravity. It may be waiting for you to answer or approve something.</p>
           </div>
 
           <div class="cruxes" id="cruxes" hidden></div>
